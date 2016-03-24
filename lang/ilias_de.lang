@@ -1,0 +1,2 @@
+added_work_record_subject#:#Neue Arbeit im Arbeitenarchiv eingereicht
+added_work_record_body#:#Guten Tag<br /><br />Es wurde eine neue Arbeit mit dem Titel '{TITLE}' von '{AUTHORS}' im Arbeitenarchiv eingereicht.<br /><br />Sie wurden bei dieser Arbeit als Betreuer/in erfasst.<br /><br />Hier der Link auf die Arbeit:<br />{LINK}
