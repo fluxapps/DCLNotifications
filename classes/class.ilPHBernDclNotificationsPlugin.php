@@ -16,10 +16,6 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
      */
     protected static $instance;
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     /**
      * @return ilPHBernDclNotificationsPlugin
      */
