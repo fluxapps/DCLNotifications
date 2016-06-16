@@ -64,10 +64,10 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
     {
         global $tpl;
 
-        $tpl->addInlineCss("textarea {width: 520px !important;}");
+        $tpl->addInlineCss("textarea {min-width: 520px !important;}");
 
         $multiinput = new srDclContentImporterMultiLineInputGUI("DataCollections", srPHBernDclNotificationsConfig::F_DCL_CONFIG);
-        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID: Feld der Tabelle mit dem PHBernUserSelector (im Dropdown mode)<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key) welcher dann automatisch mit _body _subject gepostfixt wird<br />5) Send Mail Field ID: Feld welches grprüft wird, ob es den Wert 'Send Mail Field Value' hat<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.");
+        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID: Feld der Tabelle mit dem PHBernUserSelector (im Dropdown mode)<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key)<br />5) Send Mail Field ID: Feld welches grprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird das nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.");
         $multiinput->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
 
         $ref_id_item = new ilTextInputGUI('Datacollection Ref-ID', srPHBernDclNotificationsConfig::F_DCL_REF_ID);
@@ -91,7 +91,7 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
         $this->addItem($multiinput);
 
         $multiinput_email = new srDclContentImporterMultiLineInputGUI("Mail-Text", srPHBernDclNotificationsConfig::F_DCL_MAIL_CONFIG);
-        $multiinput_email->setInfo("1) Mail-Text-Key: Key welcher oben als Base Lang Key Hinterlegt wird. Postfix _student oder _doz werden für die entsprechden Mail angefügt.<br />2) Mail Ziel (Owner / Extern) <br />3) Mail Betreff<br />4) Mail inhalt (es können alle Dcl Spaltentitel verwendet werden)");
+        $multiinput_email->setInfo("1) Mail-Text-Key: Key welcher oben als Base Lang Key Hinterlegt wird. <br />2) Mail Ziel (Besitzer / Externer) <br />3) Mail Betreff<br />4) Mail inhalt (es können alle Dcl Spaltentitel in CABS verwendet werden)");
         $multiinput_email->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
 
         $language_key = new ilTextInputGUI('Mail-Text-Key', srPHBernDclNotificationsConfig::F_DCL_MAIL_KEY);
