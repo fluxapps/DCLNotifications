@@ -9,6 +9,7 @@ require_once('./Services/ActiveRecord/class.ActiveRecord.php');
 class srPHBernDclNotificationsConfig extends ActiveRecord
 {
     const F_DCL_CONFIG = 'dcl_config';
+    const F_DCL_MAIL_CONFIG = 'dcl_mail_config';
     const F_DCL_REF_ID = 'dcl_ref_id';
     const F_DCL_TABLE_ID = 'dcl_table_id';
 
@@ -16,6 +17,11 @@ class srPHBernDclNotificationsConfig extends ActiveRecord
     const F_BASE_LANG_KEY = 'dcl_base_lang_key';
     const F_SEND_MAIL_CHECK_FIELD_ID = 'dcl_send_mail_check_field_id';
     const F_SEND_MAIL_CHECK_FIELD_VALUE = 'dcl_send_mail_check_field_value';
+
+    const F_DCL_MAIL_KEY = 'dcl_mail_key';
+    const F_DCL_MAIL_TARGET = 'dcl_mail_target';
+    const F_DCL_MAIL_SUBJECT = 'dcl_mail_subject';
+    const F_DCL_MAIL_BODY = 'dcl_mail_body';
 
     /**
      * @var array
@@ -45,7 +51,7 @@ class srPHBernDclNotificationsConfig extends ActiveRecord
      *
      * @db_has_field        true
      * @db_fieldtype        text
-     * @db_length           1000
+     * @db_length           4000
      */
     protected $value;
 
