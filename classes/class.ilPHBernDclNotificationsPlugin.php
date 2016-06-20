@@ -110,7 +110,7 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
                             $record_field = $record->getRecordField($field->getId());
                             $value = htmlspecialchars(strip_tags(ilDclCache::getRecordRepresentation($record_field)->getHTML()));
 
-                            $replacements['{' . mb_strtoupper($field->getTitle()). '}'] = $value;
+                            $replacements['{' . mb_strtoupper($field->getTitle(), "UTF-8"). '}'] = $value;
                         }
 
                         // we use a _ as prefix so it cannot be overwritten by other fields
