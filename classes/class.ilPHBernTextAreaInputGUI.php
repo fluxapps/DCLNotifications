@@ -9,7 +9,7 @@ require_once("./Services/Form/classes/class.ilTextAreaInputGUI.php");
  */
 class ilPHBernTextAreaInputGUI extends ilTextAreaInputGUI{
 
-	function insert(&$a_tpl) {
+	function insert($a_tpl) {
 		$a_tpl->setCurrentBlock("prop_generic");
 		$a_tpl->setVariable("PROP_GENERIC", $this->render());
 		$a_tpl->parseCurrentBlock();
