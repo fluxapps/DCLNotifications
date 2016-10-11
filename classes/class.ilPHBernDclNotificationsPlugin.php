@@ -58,7 +58,9 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
 
             if ($obj_id && $record && $dcl) {
                 $collections = srPHBernDclNotificationsConfig::getConfigValue(srPHBernDclNotificationsConfig::F_DCL_CONFIG);
-
+				if (!$collections) {
+					return;
+				}
 				// iterate over all configuration entries
                 foreach($collections as $collection) {
 	                // extract all the config-fields per entry
