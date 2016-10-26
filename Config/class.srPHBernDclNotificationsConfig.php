@@ -17,6 +17,7 @@ class srPHBernDclNotificationsConfig extends ActiveRecord
     const F_BASE_LANG_KEY = 'dcl_base_lang_key';
     const F_SEND_MAIL_CHECK_FIELD_ID = 'dcl_send_mail_check_field_id';
     const F_SEND_MAIL_CHECK_FIELD_VALUE = 'dcl_send_mail_check_field_value';
+    const F_SEND_MAIL_EVENT = 'dcl_send_mail_event';
 
     const F_DCL_MAIL_KEY = 'dcl_mail_key';
     const F_DCL_MAIL_TARGET = 'dcl_mail_target';

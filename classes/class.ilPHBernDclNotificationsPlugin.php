@@ -38,7 +38,7 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
     public function handleEvent($a_component, $a_event, $a_parameter) {
         global $ilUser, $ilSetting;
         // Generate certificate if course is completed
-        if ($a_component == 'Modules/DataCollection' && $a_event == 'createRecord') {
+        if ($a_component == 'Modules/DataCollection') {
             $obj_id = $a_parameter['record_id'];
 
             /**
@@ -71,6 +71,12 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
 	                $base_lang_key = $collection[srPHBernDclNotificationsConfig::F_BASE_LANG_KEY];
 	                $send_mail_check_field_id = $collection[srPHBernDclNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_ID];
 	                $send_mail_check_field_value = $collection[srPHBernDclNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_VALUE];
+	                $event = $collection[srPHBernDclNotificationsConfig::F_SEND_MAIL_EVENT];
+
+	                // skip entry if the configured event doesn't match
+	                if ($event != $a_event) {
+	                	continue;
+	                }
 	                
 	                // check if current event is part of the current configuration
                     if($dcl->getRefId() == $ref_id && $dcl_table_id == $table_id) {
@@ -85,13 +91,17 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
 							}
 	                    }
 
-                        $raw_responsible = $record->getRecordField($mail_field)->getValue();
 
-                        $doz = array();
-                        foreach($raw_responsible as $responsible_key=>$user) {
-                            $ilias_user = new ilObjUser($user);
-                            $doz[$responsible_key] = $ilias_user->getLogin();
-                        }
+	                    $doz = array();
+	                    if (is_int($mail_field)) {
+		                    $raw_responsible = $record->getRecordField($mail_field)->getValue();
+		                    foreach($raw_responsible as $responsible_key=>$user) {
+			                    $ilias_user = new ilObjUser($user);
+			                    $doz[$responsible_key] = $ilias_user->getLogin();
+		                    }
+	                    } else {
+	                    	$doz[] = $mail_field;
+	                    }
 
 	                    // check send mail condition => if value equals the set value, the doz will receive a mail too
 	                    // TODO: make it more generic

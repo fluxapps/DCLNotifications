@@ -67,7 +67,7 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
         $tpl->addInlineCss("textarea {min-width: 520px !important;}");
 
         $multiinput = new srDclContentImporterMultiLineInputGUI("DataCollections", srPHBernDclNotificationsConfig::F_DCL_CONFIG);
-        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID: Feld der Tabelle mit dem PHBernUserSelector (im Dropdown mode)<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key)<br />5) Send Mail Field ID: Feld welches grprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird das nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.");
+        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID / E-Mail-Adresse: Entweder Feld der Tabelle mit dem PHBernUserSelector (im Dropdown mode) oder feste E-Mail-Adresse<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key)<br />5) Send Mail Field ID: Feld welches geprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.<br />7) Event: Aktion, bei welcher die Notification ausgelöst werden soll.");
         $multiinput->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
 
         $ref_id_item = new ilTextInputGUI('Datacollection Ref-ID', srPHBernDclNotificationsConfig::F_DCL_REF_ID);
@@ -87,6 +87,9 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
 
         $send_mail_field_value = new ilTextInputGUI('Send Mail Field Value', srPHBernDclNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_VALUE);
         $multiinput->addInput($send_mail_field_value);
+
+        $event = new ilTextInputGUI('Event', srPHBernDclNotificationsConfig::F_SEND_MAIL_EVENT);
+        $multiinput->addInput($event);
 
         $this->addItem($multiinput);
 
