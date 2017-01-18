@@ -96,8 +96,11 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
 	                    if (is_int($mail_field)) {
 		                    $raw_responsible = $record->getRecordField($mail_field)->getValue();
 		                    foreach($raw_responsible as $responsible_key=>$user) {
-			                    $ilias_user = new ilObjUser($user);
-			                    $doz[$responsible_key] = $ilias_user->getLogin();
+		                    	if (is_numeric($user)) {
+				                    $ilias_user = new ilObjUser($user);
+				                    $user = $ilias_user->getLogin();
+			                    }
+			                    $doz[$responsible_key] = $user;
 		                    }
 	                    } else {
 	                    	$doz[] = $mail_field;
