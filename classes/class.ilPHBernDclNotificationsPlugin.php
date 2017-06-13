@@ -117,14 +117,7 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
                         $fields = $dcl->getTableById($dcl_table_id)->getFields();
                         $replacements = array();
                         foreach($fields as $field) {
-                            // skip standard-fields for now
-                            if($field->isStandardField()) {
-                                continue;
-                            }
-
-                            $record_field = $record->getRecordField($field->getId());
-                            $value = htmlspecialchars(strip_tags(ilDclCache::getRecordRepresentation($record_field)->getHTML()));
-
+                            $value = htmlspecialchars(strip_tags($record->getRecordFieldExportValue($field->getid())));
                             $replacements['{' . mb_strtoupper($field->getTitle(), "UTF-8"). '}'] = $value;
                         }
 
