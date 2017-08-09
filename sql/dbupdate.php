@@ -23,3 +23,15 @@ $ilDB->modifyTableColumn(
 );
 
 ?>
+<#3>
+<?php
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfig.php');
+
+$ilDB->modifyTableColumn(
+	srPHBernDclNotificationsConfig::returnDbTableName(),
+	'value',
+	array(
+		"type" => "clob",
+	)
+);
+?>
