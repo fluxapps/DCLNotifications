@@ -79,7 +79,8 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
 	                }
 	                
 	                // check if current event is part of the current configuration
-                    if($dcl->getRefId() == $ref_id && $dcl_table_id == $table_id) {
+	                $dcl_obj_id = ilObjDataCollection::_lookupObjectId($ref_id);
+                    if($dcl->getId() == $dcl_obj_id && $dcl_table_id == $table_id) {
 	                    $mail_texts = srPHBernDclNotificationsConfig::getConfigValue(srPHBernDclNotificationsConfig::F_DCL_MAIL_CONFIG);
 	                    $mail_text_targets = array();
 	                    foreach($mail_texts as $mail_text_entry) {
