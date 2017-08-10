@@ -148,7 +148,7 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
 	                        $to_users = (is_array($all_email_targets[$send_key]))? implode("; ", $all_email_targets[$send_key]) : $all_email_targets[$send_key];
 	                        $plain_text = strip_tags($body);
 
-                            $mail_obj = new ilMail(ANONYMOUS_USER_ID);
+                            $mail_obj = new ilMail($record->getOwner() ? $record->getOwner() : ANONYMOUS_USER_ID);
                             $mail_obj->appendInstallationSignature(true);
                             $mail_obj->sendMail($to_users, "", "", $subject, $plain_text, array(), array( "normal" ));
                         }
