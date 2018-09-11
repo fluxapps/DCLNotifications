@@ -72,7 +72,7 @@ class ilDCLNotificationsPlugin extends ilEventHookPlugin {
 	                $event = $collection[srDCLNotificationsConfig::F_SEND_MAIL_EVENT];
 
 	                // skip entry if the configured event doesn't match
-	                if ($event != $a_event) {
+	                if ($event && ($event != $a_event)) {
 	                	continue;
 	                }
 	                
@@ -116,7 +116,9 @@ class ilDCLNotificationsPlugin extends ilEventHookPlugin {
                         $fields = $dcl->getTableById($dcl_table_id)->getFields();
                         $replacements = array();
                         foreach($fields as $field) {
-                            $value = htmlspecialchars(strip_tags($record->getRecordFieldExportValue($field->getid())));
+                            $value = $record->getRecordFieldExportValue($field->getid());
+                            $value = is_array($value) ? implode(', ', $value) : $value;
+                            $value = htmlspecialchars(strip_tags($value));
                             $replacements['{' . mb_strtoupper($field->getTitle(), "UTF-8"). '}'] = $value;
                         }
 
