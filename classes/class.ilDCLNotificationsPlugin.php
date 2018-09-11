@@ -1,8 +1,6 @@
 <?php
-require_once('./Services/EventHandling/classes/class.ilEventHookPlugin.php');
-require_once('./Services/Mail/classes/class.ilMail.php');
-require_once('./Services/Link/classes/class.ilLink.php');
-require_once ('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
+require_once __DIR__ . '/../vendor/autoload.php';
+
 /**
  * ilDCLNotificationsPlugin
  *

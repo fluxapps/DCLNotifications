@@ -1,0 +1,42 @@
+{
+  "name": "studer-raimann.ch/dclnotifications",
+  "description": "Extended Notifications for ILIAS DataCollection",
+  "type": "project",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Theodor Truffer",
+      "email": "tt@studer-raimann.ch",
+      "homepage": "https://studer-raimann.ch",
+      "role": "Project Manager, Software Engineer"
+    }
+  ],
+  "support": {
+    "email": "info@studer-raimann.ch"
+  },
+  "minimum-stability": "beta",
+  "prefer-stable": true,
+  "require": {
+    "php": "^5.5.9 || ^7.0"
+  },
+  "autoload": {
+    "classmap": [
+      "./classes/",
+      "./Config/",
+      "./Helper/",
+      "../../../../../../../Services/Component/classes/class.ilPluginConfigGUI.php",
+      "../../../../../../../Services/UIComponent/",
+      "../../../../../../../Services/EventHandling/classes/class.ilEventHookPlugin.php",
+      "../../../../../../../Services/Mail/classes/class.ilMail.php",
+      "../../../../../../../Services/Link/classes/class.ilLink.php",
+      "../../../../../../../Services/Form/classes/class.ilTextAreaInputGUI.php",
+      "../../../../../../../Services/ActiveRecord/class.ActiveRecord.php",
+      "../../../../../../../Services/Form/classes/class.ilPropertyFormGUI.php"
+    ]
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "classmap-authoritative": true
+  }
+}

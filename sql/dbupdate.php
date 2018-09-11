@@ -4,8 +4,6 @@
 	require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
 
 	srDCLNotificationsConfig::installDB();
-	//$arBuilder = new arBuilder(new srDclContentImporterConfig());
-    //$arBuilder->generateDBUpdateForInstallation();
 ?>
 <#2>
 <?php

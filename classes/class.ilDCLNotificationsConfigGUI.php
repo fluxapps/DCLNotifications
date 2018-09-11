@@ -1,9 +1,5 @@
 <?php
-require_once ('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/classes/class.ilDCLNotificationsPlugin.php');
-require_once('./Services/Component/classes/class.ilPluginConfigGUI.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfigFormGUI.php');
-require_once('./Services/UIComponent/Button/classes/class.ilSubmitButton.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 
 /**
  * Class ilDCLNotificationsConfigGUI

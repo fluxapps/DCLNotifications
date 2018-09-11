@@ -1,11 +1,4 @@
 <?php
-require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
-require_once('./Customizing/global/plugins/Services/Cron/CronHook/DclContentImporter/classes/class.ilDclContentImporterPlugin.php');
-require_once('./Customizing/global/plugins/Services/Cron/CronHook/DclContentImporter/classes/Helper/class.srDclContentImporterMultiLineInputGUI.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/classes/class.ilDCLNotificationsPlugin.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfigFormGUI.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/classes/class.ilPHBernTextAreaInputGUI.php');
 
 /**
  * Class srDCLNotificationsConfigFormGUI
@@ -24,7 +17,7 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
      */
     protected $ctrl;
     /**
-     * @var ilDclContentImporterPlugin
+     * @var ilDCLNotificationsPlugin
      */
     protected $pl;
     /**
@@ -34,7 +27,7 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
 
 
     /**
-     * @param ilDclContentImporterConfigGUI $parent_gui
+     * @param srDCLNotificationsConfigFormGUI $parent_gui
      */
     public function __construct($parent_gui)
     {
@@ -66,9 +59,9 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
 
         $tpl->addInlineCss("textarea {min-width: 520px !important;}");
 
-        $multiinput = new srDclContentImporterMultiLineInputGUI("DataCollections", srDCLNotificationsConfig::F_DCL_CONFIG);
+        $multiinput = new srMultiLineInputGUI("DataCollections", srDCLNotificationsConfig::F_DCL_CONFIG);
         $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID / E-Mail-Adresse: Entweder Feld der Tabelle mit dem UserSelector (im Dropdown mode) oder feste E-Mail-Adresse<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key)<br />5) Send Mail Field ID: Feld welches geprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.<br />7) Event: Aktion, bei welcher die Notification ausgelöst werden soll.");
-        $multiinput->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
+        $multiinput->setTemplateDir($this->pl->getDirectory());
 
         $ref_id_item = new ilTextInputGUI('Datacollection Ref-ID', srDCLNotificationsConfig::F_DCL_REF_ID);
         $multiinput->addInput($ref_id_item);
@@ -93,9 +86,9 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
 
         $this->addItem($multiinput);
 
-        $multiinput_email = new srDclContentImporterMultiLineInputGUI("Mail-Text", srDCLNotificationsConfig::F_DCL_MAIL_CONFIG);
+        $multiinput_email = new srMultiLineInputGUI("Mail-Text", srDCLNotificationsConfig::F_DCL_MAIL_CONFIG);
         $multiinput_email->setInfo("1) Mail-Text-Key: Key welcher oben als Base Lang Key Hinterlegt wird. <br />2) Mail Ziel (Besitzer / Externer) <br />3) Mail Betreff<br />4) Mail inhalt (es können alle Dcl Spaltentitel in CABS verwendet werden)");
-        $multiinput_email->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
+        $multiinput_email->setTemplateDir($this->pl->getDirectory());
 
         $language_key = new ilTextInputGUI('Mail-Text-Key', srDCLNotificationsConfig::F_DCL_MAIL_KEY);
         $multiinput_email->addInput($language_key);
@@ -107,7 +100,7 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
         $mail_subject= new ilTextInputGUI('Mail-Subject', srDCLNotificationsConfig::F_DCL_MAIL_SUBJECT);
         $multiinput_email->addInput($mail_subject);
 
-        $mail_body = new ilPHBernTextAreaInputGUI('Mail-Body', srDCLNotificationsConfig::F_DCL_MAIL_BODY);
+        $mail_body = new ilDCLNotificationsTextAreaInputGUI('Mail-Body', srDCLNotificationsConfig::F_DCL_MAIL_BODY);
         $mail_body->setRows(10);
         $mail_body->setCols(50);
         $multiinput_email->addInput($mail_body);

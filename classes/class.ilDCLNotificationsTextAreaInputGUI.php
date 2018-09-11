@@ -1,13 +1,12 @@
 <?php
 
-require_once("./Services/Form/classes/class.ilTextAreaInputGUI.php");
 /**
  * Class ilDclTextArea
  *
  * @author  Michael Herren <mh@studer-raimann.ch>
  * @version 1.0.0
  */
-class ilPHBernTextAreaInputGUI extends ilTextAreaInputGUI{
+class ilDCLNotificationsTextAreaInputGUI extends ilTextAreaInputGUI{
 
 	function insert($a_tpl) {
 		$a_tpl->setCurrentBlock("prop_generic");
