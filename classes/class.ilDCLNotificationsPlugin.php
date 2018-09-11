@@ -2,22 +2,22 @@
 require_once('./Services/EventHandling/classes/class.ilEventHookPlugin.php');
 require_once('./Services/Mail/classes/class.ilMail.php');
 require_once('./Services/Link/classes/class.ilLink.php');
-require_once ('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfig.php');
+require_once ('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
 /**
- * ilPHBernDclNotificationsPlugin
+ * ilDCLNotificationsPlugin
  *
  * @author  Michael Herren <mh@studer-raimann.ch>
  *
  */
-class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
+class ilDCLNotificationsPlugin extends ilEventHookPlugin {
 
     /**
-     * @var ilPHBernDclNotificationsPlugin
+     * @var ilDCLNotificationsPlugin
      */
     protected static $instance;
 
     /**
-     * @return ilPHBernDclNotificationsPlugin
+     * @return ilDCLNotificationsPlugin
      */
     public static function getInstance()
     {
@@ -57,21 +57,21 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
             $dcl_table_id = $a_parameter['table_id'];
 
             if ($obj_id && $record && $dcl) {
-                $collections = srPHBernDclNotificationsConfig::getConfigValue(srPHBernDclNotificationsConfig::F_DCL_CONFIG);
+                $collections = srDCLNotificationsConfig::getConfigValue(srDCLNotificationsConfig::F_DCL_CONFIG);
 				if (!$collections) {
 					return;
 				}
 				// iterate over all configuration entries
                 foreach($collections as $collection) {
 	                // extract all the config-fields per entry
-                    $ref_id = $collection[srPHBernDclNotificationsConfig::F_DCL_REF_ID];
-                    $table_id = $collection[srPHBernDclNotificationsConfig::F_DCL_TABLE_ID];
+                    $ref_id = $collection[srDCLNotificationsConfig::F_DCL_REF_ID];
+                    $table_id = $collection[srDCLNotificationsConfig::F_DCL_TABLE_ID];
 
-                    $mail_field = $collection[srPHBernDclNotificationsConfig::F_MAIL_FIELD_ID];
-	                $base_lang_key = $collection[srPHBernDclNotificationsConfig::F_BASE_LANG_KEY];
-	                $send_mail_check_field_id = $collection[srPHBernDclNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_ID];
-	                $send_mail_check_field_value = $collection[srPHBernDclNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_VALUE];
-	                $event = $collection[srPHBernDclNotificationsConfig::F_SEND_MAIL_EVENT];
+                    $mail_field = $collection[srDCLNotificationsConfig::F_MAIL_FIELD_ID];
+	                $base_lang_key = $collection[srDCLNotificationsConfig::F_BASE_LANG_KEY];
+	                $send_mail_check_field_id = $collection[srDCLNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_ID];
+	                $send_mail_check_field_value = $collection[srDCLNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_VALUE];
+	                $event = $collection[srDCLNotificationsConfig::F_SEND_MAIL_EVENT];
 
 	                // skip entry if the configured event doesn't match
 	                if ($event != $a_event) {
@@ -81,13 +81,13 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
 	                // check if current event is part of the current configuration
 	                $dcl_obj_id = ilObjDataCollection::_lookupObjectId($ref_id);
                     if($dcl->getId() == $dcl_obj_id && $dcl_table_id == $table_id) {
-	                    $mail_texts = srPHBernDclNotificationsConfig::getConfigValue(srPHBernDclNotificationsConfig::F_DCL_MAIL_CONFIG);
+	                    $mail_texts = srDCLNotificationsConfig::getConfigValue(srDCLNotificationsConfig::F_DCL_MAIL_CONFIG);
 	                    $mail_text_targets = array();
 	                    foreach($mail_texts as $mail_text_entry) {
-							if($mail_text_entry[srPHBernDclNotificationsConfig::F_DCL_MAIL_KEY] == $base_lang_key) {
-								$mail_text_targets[$mail_text_entry[srPHBernDclNotificationsConfig::F_DCL_MAIL_TARGET]] = array(
-									srPHBernDclNotificationsConfig::F_DCL_MAIL_SUBJECT => $mail_text_entry[srPHBernDclNotificationsConfig::F_DCL_MAIL_SUBJECT],
-									srPHBernDclNotificationsConfig::F_DCL_MAIL_BODY => $mail_text_entry[srPHBernDclNotificationsConfig::F_DCL_MAIL_BODY],
+							if($mail_text_entry[srDCLNotificationsConfig::F_DCL_MAIL_KEY] == $base_lang_key) {
+								$mail_text_targets[$mail_text_entry[srDCLNotificationsConfig::F_DCL_MAIL_TARGET]] = array(
+									srDCLNotificationsConfig::F_DCL_MAIL_SUBJECT => $mail_text_entry[srDCLNotificationsConfig::F_DCL_MAIL_SUBJECT],
+									srDCLNotificationsConfig::F_DCL_MAIL_BODY => $mail_text_entry[srDCLNotificationsConfig::F_DCL_MAIL_BODY],
 								);
 							}
 	                    }
@@ -135,10 +135,10 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
                             }
 
                             // mail subject
-                            $subject = $this->getLanguageText($mail_text_targets[$send_mail_target][srPHBernDclNotificationsConfig::F_DCL_MAIL_SUBJECT]);
+                            $subject = $this->getLanguageText($mail_text_targets[$send_mail_target][srDCLNotificationsConfig::F_DCL_MAIL_SUBJECT]);
 
                             // mail body
-                            $body = $this->getLanguageText($mail_text_targets[$send_mail_target][srPHBernDclNotificationsConfig::F_DCL_MAIL_BODY]);
+                            $body = $this->getLanguageText($mail_text_targets[$send_mail_target][srDCLNotificationsConfig::F_DCL_MAIL_BODY]);
 
                             foreach($replacements as $replacement_key=>$replacement) {
                                 $body = str_replace($replacement_key, $replacement, $body);
@@ -179,6 +179,6 @@ class ilPHBernDclNotificationsPlugin extends ilEventHookPlugin {
      */
     function getPluginName()
     {
-        return "PHBernDclNotifications";
+        return "DCLNotifications";
     }
 }

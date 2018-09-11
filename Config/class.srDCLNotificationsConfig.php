@@ -2,11 +2,11 @@
 require_once('./Services/ActiveRecord/class.ActiveRecord.php');
 
 /**
- * Class srPHBernDclNotificationsConfig
+ * Class srDCLNotificationsConfig
  *
  * @author Michael Herren <mh@studer-raimann.ch>
  */
-class srPHBernDclNotificationsConfig extends ActiveRecord
+class srDCLNotificationsConfig extends ActiveRecord
 {
     const F_DCL_CONFIG = 'dcl_config';
     const F_DCL_MAIL_CONFIG = 'dcl_mail_config';

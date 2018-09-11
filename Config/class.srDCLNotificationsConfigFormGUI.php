@@ -2,21 +2,21 @@
 require_once('./Services/Form/classes/class.ilPropertyFormGUI.php');
 require_once('./Customizing/global/plugins/Services/Cron/CronHook/DclContentImporter/classes/class.ilDclContentImporterPlugin.php');
 require_once('./Customizing/global/plugins/Services/Cron/CronHook/DclContentImporter/classes/Helper/class.srDclContentImporterMultiLineInputGUI.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/classes/class.ilPHBernDclNotificationsPlugin.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfig.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfigFormGUI.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/classes/class.ilPHBernTextAreaInputGUI.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/classes/class.ilDCLNotificationsPlugin.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfigFormGUI.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/classes/class.ilPHBernTextAreaInputGUI.php');
 
 /**
- * Class srPHBernDclNotificationsConfigFormGUI
+ * Class srDCLNotificationsConfigFormGUI
  *
  * @author Michael Herren <mh@studer-raimann.ch>
  */
-class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
+class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
 {
 
     /**
-     * @var srPHBernArbeitenarchivConfigGUI
+     * @var ilDCLNotificationsConfigGUI
      */
     protected $parent_gui;
     /**
@@ -42,9 +42,9 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
         $this->parent_gui = $parent_gui;
         $this->ctrl = $ilCtrl;
         $this->lng = $lng;
-        $this->pl = ilPHBernDclNotificationsPlugin::getInstance();
+        $this->pl = ilDCLNotificationsPlugin::getInstance();
         $this->setFormAction($this->ctrl->getFormAction($this->parent_gui));
-        $this->setTitle('PHBern Dcl-Notifications');
+        $this->setTitle('DataCollection Notifications');
         $this->initForm();
     }
 
@@ -66,48 +66,48 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
 
         $tpl->addInlineCss("textarea {min-width: 520px !important;}");
 
-        $multiinput = new srDclContentImporterMultiLineInputGUI("DataCollections", srPHBernDclNotificationsConfig::F_DCL_CONFIG);
-        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID / E-Mail-Adresse: Entweder Feld der Tabelle mit dem PHBernUserSelector (im Dropdown mode) oder feste E-Mail-Adresse<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key)<br />5) Send Mail Field ID: Feld welches geprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.<br />7) Event: Aktion, bei welcher die Notification ausgelöst werden soll.");
+        $multiinput = new srDclContentImporterMultiLineInputGUI("DataCollections", srDCLNotificationsConfig::F_DCL_CONFIG);
+        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID / E-Mail-Adresse: Entweder Feld der Tabelle mit dem UserSelector (im Dropdown mode) oder feste E-Mail-Adresse<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key)<br />5) Send Mail Field ID: Feld welches geprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.<br />7) Event: Aktion, bei welcher die Notification ausgelöst werden soll.");
         $multiinput->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
 
-        $ref_id_item = new ilTextInputGUI('Datacollection Ref-ID', srPHBernDclNotificationsConfig::F_DCL_REF_ID);
+        $ref_id_item = new ilTextInputGUI('Datacollection Ref-ID', srDCLNotificationsConfig::F_DCL_REF_ID);
         $multiinput->addInput($ref_id_item);
 
-        $table_id_item = new ilTextInputGUI('Datacollection Table-ID', srPHBernDclNotificationsConfig::F_DCL_TABLE_ID);
+        $table_id_item = new ilTextInputGUI('Datacollection Table-ID', srDCLNotificationsConfig::F_DCL_TABLE_ID);
         $multiinput->addInput($table_id_item);
 
-        $mail_field = new ilTextInputGUI('Mail Field ID', srPHBernDclNotificationsConfig::F_MAIL_FIELD_ID);
+        $mail_field = new ilTextInputGUI('Mail Field ID', srDCLNotificationsConfig::F_MAIL_FIELD_ID);
         $multiinput->addInput($mail_field);
 
-        $base_lang_key_field = new ilTextInputGUI('Base Lang Key Field', srPHBernDclNotificationsConfig::F_BASE_LANG_KEY);
+        $base_lang_key_field = new ilTextInputGUI('Base Lang Key Field', srDCLNotificationsConfig::F_BASE_LANG_KEY);
         $multiinput->addInput($base_lang_key_field);
 
-        $send_mail_field = new ilTextInputGUI('Send Mail Field ID', srPHBernDclNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_ID);
+        $send_mail_field = new ilTextInputGUI('Send Mail Field ID', srDCLNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_ID);
         $multiinput->addInput($send_mail_field);
 
-        $send_mail_field_value = new ilTextInputGUI('Send Mail Field Value', srPHBernDclNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_VALUE);
+        $send_mail_field_value = new ilTextInputGUI('Send Mail Field Value', srDCLNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_VALUE);
         $multiinput->addInput($send_mail_field_value);
 
-        $event = new ilTextInputGUI('Event', srPHBernDclNotificationsConfig::F_SEND_MAIL_EVENT);
+        $event = new ilTextInputGUI('Event', srDCLNotificationsConfig::F_SEND_MAIL_EVENT);
         $multiinput->addInput($event);
 
         $this->addItem($multiinput);
 
-        $multiinput_email = new srDclContentImporterMultiLineInputGUI("Mail-Text", srPHBernDclNotificationsConfig::F_DCL_MAIL_CONFIG);
+        $multiinput_email = new srDclContentImporterMultiLineInputGUI("Mail-Text", srDCLNotificationsConfig::F_DCL_MAIL_CONFIG);
         $multiinput_email->setInfo("1) Mail-Text-Key: Key welcher oben als Base Lang Key Hinterlegt wird. <br />2) Mail Ziel (Besitzer / Externer) <br />3) Mail Betreff<br />4) Mail inhalt (es können alle Dcl Spaltentitel in CABS verwendet werden)");
         $multiinput_email->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
 
-        $language_key = new ilTextInputGUI('Mail-Text-Key', srPHBernDclNotificationsConfig::F_DCL_MAIL_KEY);
+        $language_key = new ilTextInputGUI('Mail-Text-Key', srDCLNotificationsConfig::F_DCL_MAIL_KEY);
         $multiinput_email->addInput($language_key);
 
-        $mail_target = new ilSelectInputGUI('Mail-Target', srPHBernDclNotificationsConfig::F_DCL_MAIL_TARGET);
+        $mail_target = new ilSelectInputGUI('Mail-Target', srDCLNotificationsConfig::F_DCL_MAIL_TARGET);
         $mail_target->setOptions(array('owner'=>'Besitzer', 'extern'=>'Externer'));
         $multiinput_email->addInput($mail_target);
 
-        $mail_subject= new ilTextInputGUI('Mail-Subject', srPHBernDclNotificationsConfig::F_DCL_MAIL_SUBJECT);
+        $mail_subject= new ilTextInputGUI('Mail-Subject', srDCLNotificationsConfig::F_DCL_MAIL_SUBJECT);
         $multiinput_email->addInput($mail_subject);
 
-        $mail_body = new ilPHBernTextAreaInputGUI('Mail-Body', srPHBernDclNotificationsConfig::F_DCL_MAIL_BODY);
+        $mail_body = new ilPHBernTextAreaInputGUI('Mail-Body', srDCLNotificationsConfig::F_DCL_MAIL_BODY);
         $mail_body->setRows(10);
         $mail_body->setCols(50);
         $multiinput_email->addInput($mail_body);
@@ -138,7 +138,7 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
     {
         if (self::checkItem($item)) {
             $key = $item->getPostVar();
-            $array[$key] = srPHBernDclNotificationsConfig::getConfigValue($key);
+            $array[$key] = srDCLNotificationsConfig::getConfigValue($key);
             if (self::checkForSubItem($item)) {
                 foreach ($item->getSubItems() as $subitem) {
                     $this->getValuesForItem($subitem, $array);
@@ -172,7 +172,7 @@ class srPHBernDclNotificationsConfigFormGUI extends ilPropertyFormGUI
         if (self::checkItem($item)) {
             $key = $item->getPostVar();
 
-            srPHBernDclNotificationsConfig::set($key, $this->getInput($key));
+            srDCLNotificationsConfig::set($key, $this->getInput($key));
             if (self::checkForSubItem($item)) {
                 foreach ($item->getSubItems() as $subitem) {
                     $this->saveValueForItem($subitem);

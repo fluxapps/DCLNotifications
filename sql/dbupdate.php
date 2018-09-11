@@ -1,18 +1,18 @@
 <#1>
 <?php
 	require_once('./Services/ActiveRecord/Fields/Converter/class.arBuilder.php');
-	require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfig.php');
+	require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
 
-	srPHBernDclNotificationsConfig::installDB();
+	srDCLNotificationsConfig::installDB();
 	//$arBuilder = new arBuilder(new srDclContentImporterConfig());
     //$arBuilder->generateDBUpdateForInstallation();
 ?>
 <#2>
 <?php
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfig.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
 
 $ilDB->modifyTableColumn(
-	srPHBernDclNotificationsConfig::returnDbTableName(),
+	srDCLNotificationsConfig::returnDbTableName(),
 	'value',
 	array(
 		"type" => "text",
@@ -25,10 +25,10 @@ $ilDB->modifyTableColumn(
 ?>
 <#3>
 <?php
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfig.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
 
 $ilDB->modifyTableColumn(
-	srPHBernDclNotificationsConfig::returnDbTableName(),
+	srDCLNotificationsConfig::returnDbTableName(),
 	'value',
 	array(
 		"type" => "clob",

@@ -1,20 +1,20 @@
 <?php
-require_once ('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/classes/class.ilPHBernDclNotificationsPlugin.php');
+require_once ('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/classes/class.ilDCLNotificationsPlugin.php');
 require_once('./Services/Component/classes/class.ilPluginConfigGUI.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfig.php');
-require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/PHBernDclNotifications/Config/class.srPHBernDclNotificationsConfigFormGUI.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfig.php');
+require_once('./Customizing/global/plugins/Services/EventHandling/EventHook/DCLNotifications/Config/class.srDCLNotificationsConfigFormGUI.php');
 require_once('./Services/UIComponent/Button/classes/class.ilSubmitButton.php');
 
 /**
- * Class ilPHBernDclNotificationsConfigGUI
+ * Class ilDCLNotificationsConfigGUI
  *
  * @author Michael Herren <mh@studer-raimann.ch>
  */
-class ilPHBernDclNotificationsConfigGUI extends ilPluginConfigGUI
+class ilDCLNotificationsConfigGUI extends ilPluginConfigGUI
 {
 
     /**
-     * @var ilPHBernDclNotificationsPlugin
+     * @var ilDCLNotificationsPlugin
      */
     protected $pl;
 
@@ -32,7 +32,7 @@ class ilPHBernDclNotificationsConfigGUI extends ilPluginConfigGUI
     public function __construct()
     {
         global $ilCtrl, $tpl;
-        $this->pl = ilPHBernDclNotificationsPlugin::getInstance();
+        $this->pl = ilDCLNotificationsPlugin::getInstance();
         $this->ctrl = $ilCtrl;
         $this->tpl = $tpl;
     }
@@ -61,7 +61,7 @@ class ilPHBernDclNotificationsConfigGUI extends ilPluginConfigGUI
         /** @var $ilToolbar ilToolbarGUI */
         $ilToolbar->setFormAction($this->ctrl->getFormAction($this));
 
-        $form = new srPHBernDclNotificationsConfigFormGUI($this);
+        $form = new srDCLNotificationsConfigFormGUI($this);
         $form->fillForm();
         $this->tpl->setContent($form->getHTML());
     }
@@ -72,7 +72,7 @@ class ilPHBernDclNotificationsConfigGUI extends ilPluginConfigGUI
      */
     public function save()
     {
-        $form = new srPHBernDclNotificationsConfigFormGUI($this);
+        $form = new srDCLNotificationsConfigFormGUI($this);
         if ($form->saveObject()) {
             ilUtil::sendSuccess('Saved Config', true);
             $this->ctrl->redirect($this, 'configure');
