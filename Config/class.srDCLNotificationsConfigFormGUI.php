@@ -81,8 +81,11 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
         $send_mail_field_value = new ilTextInputGUI('Send Mail Field Value', srDCLNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_VALUE);
         $multiinput->addInput($send_mail_field_value);
 
-        $event = new ilTextInputGUI('Event', srDCLNotificationsConfig::F_SEND_MAIL_EVENT);
-        $multiinput->addInput($event);
+		$event_drop = new ilSelectInputGUI('Event', srDCLNotificationsConfig::F_SEND_MAIL_EVENT);
+		$event_drop->setOptions(["createRecord" => "createRecord",
+		                         "updateRecord" => "updateRecord",
+		                         "deleteRecord" => "deleteRecord"]);
+		$multiinput->addInput($event_drop);
 
         $this->addItem($multiinput);
 
