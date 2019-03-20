@@ -60,7 +60,7 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
         $tpl->addInlineCss("textarea {min-width: 520px !important;}");
 
         $multiinput = new srMultiLineInputGUI("DataCollections", srDCLNotificationsConfig::F_DCL_CONFIG);
-        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID / E-Mail-Adresse: Entweder Feld der Tabelle mit dem UserSelector (im Dropdown mode) oder feste E-Mail-Adresse<br >4) Language Base Key: Ein Language-Selector für eigene Nachrichten (irgend_ein_key)<br />5) Send Mail Field ID: Feld welches geprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.<br />7) Event: Aktion, bei welcher die Notification ausgelöst werden soll.");
+        $multiinput->setInfo("1) DataCollection-Ref-ID: Ref-ID der betroffenen DataCollection<br />2) DataCollection-Table-ID: Tabellen-ID der DataCollection<br />3) Mail Field ID / E-Mail-Adresse: Entweder Feld der Tabelle mit dem UserSelector (im Dropdown mode) oder feste E-Mail-Adresse<br >4) E-Mail key welcher bei Mail-Text definiert wurde<br />5) Send Mail Field ID: Feld welches geprüft wird, ob es den Wert 'Send Mail Field Value' hat. Sonst wird nur der Owner eine Mail erhalten.<br />6) Send Mail Field Value: Wert welches das 'Send Mail Field' haben muss, damit eine Mail ausgelöst wird.<br />7) Event: Aktion, bei welcher die Notification ausgelöst werden soll.");
         $multiinput->setTemplateDir($this->pl->getDirectory());
 
         $ref_id_item = new ilTextInputGUI('Datacollection Ref-ID', srDCLNotificationsConfig::F_DCL_REF_ID);
@@ -69,10 +69,10 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
         $table_id_item = new ilTextInputGUI('Datacollection Table-ID', srDCLNotificationsConfig::F_DCL_TABLE_ID);
         $multiinput->addInput($table_id_item);
 
-        $mail_field = new ilTextInputGUI('Mail Field ID', srDCLNotificationsConfig::F_MAIL_FIELD_ID);
+        $mail_field = new ilTextInputGUI('Mail Field ID / E-Mail', srDCLNotificationsConfig::F_MAIL_FIELD_ID);
         $multiinput->addInput($mail_field);
 
-        $base_lang_key_field = new ilTextInputGUI('Base Lang Key Field', srDCLNotificationsConfig::F_BASE_LANG_KEY);
+        $base_lang_key_field = new ilTextInputGUI('E-Mail Key', srDCLNotificationsConfig::F_BASE_LANG_KEY);
         $multiinput->addInput($base_lang_key_field);
 
         $send_mail_field = new ilTextInputGUI('Send Mail Field ID', srDCLNotificationsConfig::F_SEND_MAIL_CHECK_FIELD_ID);
@@ -85,6 +85,7 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
 		$event_drop->setOptions(["createRecord" => "createRecord",
 		                         "updateRecord" => "updateRecord",
 		                         "deleteRecord" => "deleteRecord"]);
+		$multiinput->setShowLabel(true);
 		$multiinput->addInput($event_drop);
 
         $this->addItem($multiinput);
@@ -106,6 +107,7 @@ class srDCLNotificationsConfigFormGUI extends ilPropertyFormGUI
         $mail_body = new ilDCLNotificationsTextAreaInputGUI('Mail-Body', srDCLNotificationsConfig::F_DCL_MAIL_BODY);
         $mail_body->setRows(10);
         $mail_body->setCols(50);
+        $multiinput_email->setShowLabel(true);
         $multiinput_email->addInput($mail_body);
 
         $this->addItem($multiinput_email);
