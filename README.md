@@ -3,7 +3,7 @@ DCLNotifications
 
 DLC Notification description
 
-* Does dcl notification Things
+* Allows Configuration of Emails to send when there are changes (Create/Update/Delete) in a data collection
 
 Installation
 ------------
