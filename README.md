@@ -17,9 +17,9 @@ git clone https://github.com/studer-raimann/DCLNotifications.git
 
 ### Adjustment suggestions
 * Adjustment suggestions by pull requests
-* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/PLATT
-* Bug reports under https://jira.studer-raimann.ch/projects/PLATT
-* For external users you can report it at https://plugins.studer-raimann.ch/goto.php?target=uihk_srsu_PLATT
+* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/PLDCLNOTIFICATIONS
+* Bug reports under https://jira.studer-raimann.ch/projects/PLDCLNOTIFICATIONS
+* For external users you can report it at https://plugins.studer-raimann.ch/goto.php?target=uihk_srsu_PLDCLNOTIFICATIONS
 
 ### ILIAS Plugin SLA
 Wir lieben und leben die Philosophie von Open Source Software! Die meisten unserer Entwicklungen, welche wir im Kundenauftrag oder in Eigenleistung entwickeln, stellen wir öffentlich allen Interessierten kostenlos unter https://github.com/studer-raimann zur Verfügung.
