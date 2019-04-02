@@ -106,11 +106,15 @@ class ilDCLNotificationsPlugin extends ilEventHookPlugin {
 	                    }
 
 	                    // check send mail condition => if value equals the set value, the doz will receive a mail too
-	                    // TODO: make it more generic
                         $responsible = null;
-                        if($send_mail_check_field_id == "" || $record->getRecordField($send_mail_check_field_id)->getValue() == $send_mail_check_field_value) {
-                            $responsible = $doz;
-                        }
+	                    $record_field_values = $record->getRecordField($send_mail_check_field_id)->getValue();
+	                    $record_field_values = is_array($record_field_values) ? $record_field_values : array($record_field_values);
+	                    foreach ($record_field_values as $record_field_value) {
+		                    if($send_mail_check_field_id == "" || $record_field_value == $send_mail_check_field_value) {
+			                    $responsible = $doz;
+			                    break;
+		                    }
+	                    }
 
 	                    // get all fields as markers
                         $fields = $dcl->getTableById($dcl_table_id)->getFields();
